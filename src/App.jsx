@@ -25,7 +25,6 @@ import AddCandidate from './pages/candidates/AddCandidate';
 import SearchVoter from './pages/SearchVoter';
 import SearchOfficer from './pages/SearchOfficer';
 import RegisteredVoterList from './pages/RegisteredVoterLisr';
-import { VoteIcon } from 'lucide-react';
 import VoteResultsByStation from './pages/VoteResultsByStation';
 import ReviewFeedback from './pages/ReviewFeedback';
 function App() {
@@ -49,11 +48,11 @@ function App() {
         <Route path="/delete-voter" element={<DeleteVoter/>}/>
         <Route path="/edit-voter" element={<EditVoter/>}/>
         <Route path="/add-admin" element={<AddAdmin/>}/>
-        <Route path="delete-admin" element={<DeleteAdmin/>}/>
+        <Route path="/delete-admin" element={<DeleteAdmin/>}/>
         <Route path="/edit-admin" element={<EditAdmin/>}/>
         <Route path="/manage-candidates" element={<ManageCandidate />} />
         <Route path="/add-candidate" element={<AddCandidate/>}/>
-        <Route path="delete-candidate" element={<DeleteCandidate/>}/>
+        <Route path="/delete-candidate" element={<DeleteCandidate/>}/>
         <Route path="/edit-candidate" element={<EditCandidate/>}/>
         <Route path="/search-voter" element={<SearchVoter/>}/>
         <Route path="/search-officer" element={<SearchOfficer/>}/>
