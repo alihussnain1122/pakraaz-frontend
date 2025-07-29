@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/api';
 
 const CommissionLogin = () => {
   const [username, setUsername] = useState('');
@@ -11,7 +11,6 @@ const CommissionLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting:", username, password);
     
     // Validate fields
     if (!username || !password) {
@@ -24,15 +23,10 @@ const CommissionLogin = () => {
     setError('');  // Reset previous errors
     
     try {
-      console.log('Attempting login to:', 'api/commission/login');
-      
-      const response = await axios.post('api/commission/login', {
+      const response = await api.post('/api/commission/login', {
         username,
         password,
       });
-
-      // Log the full response for debugging
-      console.log('Login response:', response.data);
 
       // Handle success - token received
       if (response.data && response.data.token) {
@@ -42,11 +36,10 @@ const CommissionLogin = () => {
         setError('Unexpected response. Please try again.');
       }
     } catch (err) {
-      console.error('Login error:', err);
       // Show the specific error message from the response if available
       setError(
         err.response?.data?.message || 
-        `Login failed (${err.response?.status || 'unknown error'}). Please try again.`
+        `Login failed. Please try again.`
       );
     } finally {
       setLoading(false); // Set loading to false once the API call finishes

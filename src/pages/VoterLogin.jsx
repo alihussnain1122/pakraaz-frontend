@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-//import axios from 'axios';
+import api from '../utils/api';
 
 const VoterLogin = () => {
   const [CNIC, setCNIC] = useState('');
@@ -16,25 +16,16 @@ const VoterLogin = () => {
     }
   
     try {
-      const response = await fetch('api/voter/login-voter', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ CNIC, voterID }),
+      const response = await api.post('/api/voter/login-voter', {
+        CNIC,
+        voterID,
       });
       
-  
-      const data = await response.json();
-      if (response.ok) {
-        localStorage.setItem('token', data.token);  // Store JWT Token
-        navigate('/voter-dashboard');
-      } else {
-        setError(data.message);
-      }
+      const data = response.data;
+      localStorage.setItem('token', data.token);  // Store JWT Token
+      navigate('/voter-dashboard');
     } catch (error) {
-      console.error('Login Error:', error);
-      setError('Something went wrong, please try again later.');
+      setError(error.response?.data?.message || 'Something went wrong, please try again later.');
     }
   };
   
